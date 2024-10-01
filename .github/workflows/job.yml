@@ -1,46 +1,22 @@
-name: Daily Contributions
+name: Daily Commit
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 1-5'
+    - cron: '0 0 * * *'
+
 jobs:
-  make-contribution:
+  commit:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          # Checkout with full commit history
-          fetch-depth: 0
-      - name: Make daily contribution
-        run: |
-          # Replace this command with your own command or script that makes the changes
-          echo "Making daily contribution"
-          echo "$(date)" >> README.md
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v7
-        with:
-          author_name: "siwanetzu"
-          author_email: "domgolab@gmail.com"
-          message: "Daily contribution"
-          # Set the files to commit - replace this with your own file paths
-          add: "README.md"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          branch: daily-contribution
-          # Set the Git credentials - replace this with your own secrets
-          github_token: ${{ secrets.CZAKO_TOKEN }}
-      - name: Open pull request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: "Daily Contribution"
-          commit-message: "Daily contribution"
-          branch: daily-contribution
-          base: main
-          # Set the pull request body - replace this with your own content
-          body: "This pull request was created automatically by a GitHub Actions workflow to make a daily contribution."
-          # Set the Git credentials - replace this with your own secrets
-          token: ${{ secrets.CZAKO_TOKEN }}
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
+    - name: Make a change
+      run: |
+        date >> update.log
+        git config --global user.email "your-email@example.com"
+        git config --global user.name "your-username"
+        git add .
+        git commit -m "Automated commit"
+        git push
