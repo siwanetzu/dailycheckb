@@ -15,8 +15,8 @@ jobs:
     - name: Make a change
       run: |
         date >> update.log
-        git config --global user.email "your-email@example.com"
-        git config --global user.name "your-username"
+        git config --global user.email "domgolab@gmail.com"
+        git config --global user.name "siwanetzu"
         git add .
         git commit -m "Automated commit"
         git push
