@@ -43,3 +43,5 @@ jobs:
           body: "This pull request was created automatically by a GitHub Actions workflow to make a daily contribution."
           # Set the Git credentials - replace this with your own secrets
           token: ${{ secrets.GITHUB_TOKEN }}
+on:
+  push:
